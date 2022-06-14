@@ -111,8 +111,6 @@ Retrieve a list of organization OAuth2 applications.  Required scope: **organiza
 import time
 import cybrid_api_id
 from cybrid_api_id.api import organization_applications_idp_api
-from cybrid_api_id.model.list_request_per_page import ListRequestPerPage
-from cybrid_api_id.model.list_request_page import ListRequestPage
 from cybrid_api_id.model.application_list import ApplicationList
 from pprint import pprint
 # Defining the host is optional and defaults to https://id.demo.cybrid.app
@@ -141,8 +139,8 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with cybrid_api_id.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = organization_applications_idp_api.OrganizationApplicationsIdpApi(api_client)
-    page = ListRequestPage(0) # ListRequestPage | The page index to retrieve. (optional)
-    per_page = ListRequestPerPage(10) # ListRequestPerPage | The number of entities per page to return. (optional)
+    page = ListRequestPage(0) # int | The page index to retrieve. (optional) if omitted the server will use the default value of 0
+    per_page = ListRequestPerPage(10) # int | The number of entities per page to return. (optional) if omitted the server will use the default value of 10
 
     # example passing only required values which don't have defaults set
     # and optional values
@@ -159,8 +157,8 @@ with cybrid_api_id.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **ListRequestPage**| The page index to retrieve. | [optional]
- **per_page** | **ListRequestPerPage**| The number of entities per page to return. | [optional]
+ **page** | **int**| The page index to retrieve. | [optional] if omitted the server will use the default value of 0
+ **per_page** | **int**| The number of entities per page to return. | [optional] if omitted the server will use the default value of 10
 
 ### Return type
 

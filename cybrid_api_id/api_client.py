@@ -3,7 +3,7 @@
 
     # Welcome  Welcome to the Cybrid platform; enabling turnkey crypto banking services!  In these documents, you will find information on the operations provided by our platform, as well as details on how our REST API operates more generally.  Our complete set of APIs allows you to manage all your resources: your Organization, your banks and your identities. The complete set of APIs can be found on the following pages:  | API                                                            | Description                  | |----------------------------------------------------------------|------------------------------| | [Organization API](https://organization.demo.cybrid.app/api/schema/swagger-ui) | APIs to manage organizations | | [Bank API](https://bank.demo.cybrid.app/api/schema/swagger-ui)                 | APIs to manage banks         | | [Identities API](https://id.demo.cybrid.app/api/schema/swagger-ui)                     | APIs to manage identities    |  When you're ready, [request access](https://www.cybrid.xyz/access) to your Dashboard to view and administer your Organization. Once you've logged in, you can begin creating Banks, either for sandbox or production usage, and start enabling your customers to leverage DeFi and web3 with confidence.  If you have any questions, please contact [Support](mailto:support@cybrid.app) at any time so that we can help.  ## Authentication  The Cybrid Platform uses OAuth 2.0 Bearer Tokens to authenticate requests to the platform. Credentials to create Organization and Bank tokens can be generated via your Dashboard ([request access](https://www.cybrid.xyz/access)).  An Organization Token applies broadly to the whole Organization and all of its Banks, whereas, a Bank Token is specific to an individual Bank.  Both Organization and Bank tokens can be created using the OAuth Client Credential Grant flow. Each Organization and Bank has its own unique Client ID and Secret that allows for machine-to-machine authentication.  **Never share your Client ID or Secret publicly or in your source code repository**  Your Client ID and Secret can be exchanged for a time-limited Bearer Token by interacting with the Cybrid Identity Provider or through interacting with the **Authorize** button in this document:  ``` curl -X POST https://id.demo.cybrid.app/oauth/token -d '{     \"grant_type\": \"client_credentials\",     \"client_id\": \"<Your Client ID>\",     \"client_secret\": \"<Your Secret>\",     \"scope\": \"<Your requested scopes -- space separated>\"   }' -H \"Content-Type: application/json\" ```  ## Scopes  The Cybrid platform supports the use of scopes to control the level of access a token is limited to. Scopes do not grant access to resources; instead, they provide limits, in support of the least privilege principal.  The following scopes are available on the platform and can be requested when generating either an Organization or a Bank token. Generally speaking, the _Read_ scope is required to read and list resources, the _Write_ scope is required to update a resource and the _Execute_ scope is required to create a resource.  | Resource      | Read scope         | Write scope          | Execute scope     | Token Type         | |---------------|--------------------|----------------------|-------------------|--------------------| | Organizations | organizations:read | organizations:write  |                   | Organization/ Bank | | Banks         | banks:read         | banks:write          | banks:execute     | Organization/ Bank | | Customers     | customers:read     | customers:write      | customers:execute | Bank               | | Assets        | prices:read        |                      |                   | Bank               | | Accounts      | accounts:read      |                      | accounts:execute  | Bank               | | Prices        | prices:read        |                      |                   | Bank               | | Symbols       | prices:read        |                      |                   | Bank               | | Quotes        | quotes:read        |                      | quotes:execute    | Bank               | | Trades        | trades:read        |                      | trades:execute    | Bank               |  ## Organizations  An Organization is meant to model the organization partnering with Cybrid to use our platform.  An Organization does not directly interact with customers. Instead, an Organization has one or more banks, which encompass the financial service offerings of the platform.  ## Banks  A Bank is owned by an Organization and can be thought of as an environment or container for Customers and product offerings. An example of a Bank would be your customer facing banking website, or an internal staging environment for testing and integration.  An Organization can have multiple banks, in sandbox or production environments. A sandbox Bank will be backed by stubbed data and process flows. For instance, identity record and funding source processes will be simulated rather than performed.  ## Customers  Customers represent your banking users on the platform. At present, we offer support for Individuals as Customers.  Customers must be verified in our system before they can play any part on the platform. See the Identity Records section for more details on how a customer can be verified.  Customers must also have an account to be able to transact. See the Accounts APIs for more details on setting up accounts for the customer.   # noqa: E501
 
-    The version of the OpenAPI document: v0.26.2
+    The version of the OpenAPI document: v0.26.3
     Contact: support@cybrid.app
     Generated by: https://openapi-generator.tech
 """
@@ -133,7 +133,8 @@ class ApiClient(object):
         _request_timeout: typing.Optional[typing.Union[int, float, typing.Tuple]] = None,
         _host: typing.Optional[str] = None,
         _check_type: typing.Optional[bool] = None,
-        _content_type: typing.Optional[str] = None
+        _content_type: typing.Optional[str] = None,
+        _request_auths: typing.Optional[typing.List[typing.Dict[str, typing.Any]]] = None
     ):
 
         config = self.configuration
@@ -175,7 +176,7 @@ class ApiClient(object):
             post_params.extend(self.files_parameters(files))
             if header_params['Content-Type'].startswith("multipart"):
                 post_params = self.parameters_to_multipart(post_params,
-                                                          (dict) )
+                                                           (dict))
 
         # body
         if body:
@@ -183,7 +184,8 @@ class ApiClient(object):
 
         # auth setting
         self.update_params_for_auth(header_params, query_params,
-                                    auth_settings, resource_path, method, body)
+                                    auth_settings, resource_path, method, body,
+                                    request_auths=_request_auths)
 
         # request url
         if _host is None:
@@ -247,13 +249,14 @@ class ApiClient(object):
         if collection_types is None:
             collection_types = (dict)
         for k, v in params.items() if isinstance(params, dict) else params:  # noqa: E501
-            if isinstance(v, collection_types): # v is instance of collection_type, formatting as application/json
-                 v = json.dumps(v, ensure_ascii=False).encode("utf-8")
-                 field = RequestField(k, v)
-                 field.make_multipart(content_type="application/json; charset=utf-8")
-                 new_params.append(field)
+            if isinstance(
+                     v, collection_types): # v is instance of collection_type, formatting as application/json
+                v = json.dumps(v, ensure_ascii=False).encode("utf-8")
+                field = RequestField(k, v)
+                field.make_multipart(content_type="application/json; charset=utf-8")
+                new_params.append(field)
             else:
-                 new_params.append((k, v))
+                new_params.append((k, v))
         return new_params
 
     @classmethod
@@ -272,8 +275,10 @@ class ApiClient(object):
         """
         if isinstance(obj, (ModelNormal, ModelComposed)):
             return {
-                key: cls.sanitize_for_serialization(val) for key, val in model_to_dict(obj, serialize=True).items()
-            }
+                key: cls.sanitize_for_serialization(val) for key,
+                val in model_to_dict(
+                    obj,
+                    serialize=True).items()}
         elif isinstance(obj, io.IOBase):
             return cls.get_file_data_and_close_file(obj)
         elif isinstance(obj, (str, int, float, none_type, bool)):
@@ -286,7 +291,9 @@ class ApiClient(object):
             return [cls.sanitize_for_serialization(item) for item in obj]
         if isinstance(obj, dict):
             return {key: cls.sanitize_for_serialization(val) for key, val in obj.items()}
-        raise ApiValueError('Unable to prepare type {} for serialization'.format(obj.__class__.__name__))
+        raise ApiValueError(
+            'Unable to prepare type {} for serialization'.format(
+                obj.__class__.__name__))
 
     def deserialize(self, response, response_type, _check_type):
         """Deserializes response into an object.
@@ -351,7 +358,8 @@ class ApiClient(object):
         _preload_content: bool = True,
         _request_timeout: typing.Optional[typing.Union[int, float, typing.Tuple]] = None,
         _host: typing.Optional[str] = None,
-        _check_type: typing.Optional[bool] = None
+        _check_type: typing.Optional[bool] = None,
+        _request_auths: typing.Optional[typing.List[typing.Dict[str, typing.Any]]] = None
     ):
         """Makes the HTTP request (synchronous) and returns deserialized data.
 
@@ -399,6 +407,10 @@ class ApiClient(object):
         :param _check_type: boolean describing if the data back from the server
             should have its type checked.
         :type _check_type: bool, optional
+        :param _request_auths: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auths: list, optional
         :return:
             If async_req parameter is True,
             the request will be called asynchronously.
@@ -413,7 +425,7 @@ class ApiClient(object):
                                    response_type, auth_settings,
                                    _return_http_data_only, collection_formats,
                                    _preload_content, _request_timeout, _host,
-                                   _check_type)
+                                   _check_type, _request_auths=_request_auths)
 
         return self.pool.apply_async(self.__call_api, (resource_path,
                                                        method, path_params,
@@ -426,7 +438,7 @@ class ApiClient(object):
                                                        collection_formats,
                                                        _preload_content,
                                                        _request_timeout,
-                                                       _host, _check_type))
+                                                       _host, _check_type, None, _request_auths))
 
     def request(self, method, url, query_params=None, headers=None,
                 post_params=None, body=None, _preload_content=True,
@@ -525,7 +537,9 @@ class ApiClient(object):
         file_instance.close()
         return file_data
 
-    def files_parameters(self, files: typing.Optional[typing.Dict[str, typing.List[io.IOBase]]] = None):
+    def files_parameters(self,
+                         files: typing.Optional[typing.Dict[str,
+                                                            typing.List[io.IOBase]]] = None):
         """Builds form parameters.
 
         :param files: None or a dict with key=param_name and
@@ -583,7 +597,7 @@ class ApiClient(object):
         :return: Content-Type (e.g. application/json).
         """
         if not content_types:
-            return 'application/json'
+            return None
 
         content_types = [x.lower() for x in content_types]
 
@@ -598,7 +612,7 @@ class ApiClient(object):
             return content_types[0]
 
     def update_params_for_auth(self, headers, queries, auth_settings,
-                               resource_path, method, body):
+                               resource_path, method, body, request_auths=None):
         """Updates header and query params based on authentication setting.
 
         :param headers: Header parameters dict to be updated.
@@ -608,24 +622,36 @@ class ApiClient(object):
         :param method: A string representation of the HTTP request method.
         :param body: A object representing the body of the HTTP request.
             The object type is the return value of _encoder.default().
+        :param request_auths: if set, the provided settings will
+            override the token in the configuration.
         """
         if not auth_settings:
+            return
+
+        if request_auths:
+            for auth_setting in request_auths:
+                self._apply_auth_params(
+                    headers, queries, resource_path, method, body, auth_setting)
             return
 
         for auth in auth_settings:
             auth_setting = self.configuration.auth_settings().get(auth)
             if auth_setting:
-                if auth_setting['in'] == 'cookie':
-                    headers['Cookie'] = auth_setting['value']
-                elif auth_setting['in'] == 'header':
-                    if auth_setting['type'] != 'http-signature':
-                        headers[auth_setting['key']] = auth_setting['value']
-                elif auth_setting['in'] == 'query':
-                    queries.append((auth_setting['key'], auth_setting['value']))
-                else:
-                    raise ApiValueError(
-                        'Authentication token must be in `query` or `header`'
-                    )
+                self._apply_auth_params(
+                    headers, queries, resource_path, method, body, auth_setting)
+
+    def _apply_auth_params(self, headers, queries, resource_path, method, body, auth_setting):
+        if auth_setting['in'] == 'cookie':
+            headers['Cookie'] = auth_setting['key'] + "=" + auth_setting['value']
+        elif auth_setting['in'] == 'header':
+            if auth_setting['type'] != 'http-signature':
+                headers[auth_setting['key']] = auth_setting['value']
+        elif auth_setting['in'] == 'query':
+            queries.append((auth_setting['key'], auth_setting['value']))
+        else:
+            raise ApiValueError(
+                'Authentication token must be in `query` or `header`'
+            )
 
 
 class Endpoint(object):
@@ -675,7 +701,8 @@ class Endpoint(object):
             '_check_input_type',
             '_check_return_type',
             '_content_type',
-            '_spec_property_naming'
+            '_spec_property_naming',
+            '_request_auths'
         ])
         self.params_map['nullable'].extend(['_request_timeout'])
         self.validations = root_map['validations']
@@ -690,7 +717,8 @@ class Endpoint(object):
             '_check_input_type': (bool,),
             '_check_return_type': (bool,),
             '_spec_property_naming': (bool,),
-            '_content_type': (none_type, str)
+            '_content_type': (none_type, str),
+            '_request_auths': (none_type, list)
         }
         self.openapi_types.update(extra_types)
         self.attribute_map = root_map['attribute_map']
@@ -843,10 +871,11 @@ class Endpoint(object):
             content_type_headers_list = self.headers_map['content_type']
             if content_type_headers_list:
                 if params['body'] != "":
-                    header_list = self.api_client.select_header_content_type(
+                    content_types_list = self.api_client.select_header_content_type(
                         content_type_headers_list, self.settings['http_method'],
                         params['body'])
-                    params['header']['Content-Type'] = header_list
+                    if content_types_list:
+                        params['header']['Content-Type'] = content_types_list
 
         return self.api_client.call_api(
             self.settings['endpoint_path'], self.settings['http_method'],
@@ -864,4 +893,5 @@ class Endpoint(object):
             _preload_content=kwargs['_preload_content'],
             _request_timeout=kwargs['_request_timeout'],
             _host=_host,
+            _request_auths=kwargs['_request_auths'],
             collection_formats=params['collection_format'])
