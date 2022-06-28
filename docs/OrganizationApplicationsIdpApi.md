@@ -139,8 +139,8 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with cybrid_api_id.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = organization_applications_idp_api.OrganizationApplicationsIdpApi(api_client)
-    page = ListRequestPage(0) # int | The page index to retrieve. (optional) if omitted the server will use the default value of 0
-    per_page = ListRequestPerPage(10) # int | The number of entities per page to return. (optional) if omitted the server will use the default value of 10
+    page = ListRequestPage(0) # int | The page index to retrieve. (optional)
+    per_page = ListRequestPerPage(1) # int | The number of entities per page to return. (optional)
 
     # example passing only required values which don't have defaults set
     # and optional values
@@ -157,8 +157,8 @@ with cybrid_api_id.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **int**| The page index to retrieve. | [optional] if omitted the server will use the default value of 0
- **per_page** | **int**| The number of entities per page to return. | [optional] if omitted the server will use the default value of 10
+ **page** | **int**| The page index to retrieve. | [optional]
+ **per_page** | **int**| The number of entities per page to return. | [optional]
 
 ### Return type
 
