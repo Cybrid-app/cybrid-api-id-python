@@ -13,15 +13,11 @@ import sys
 import unittest
 
 import cybrid_api_id
-from cybrid_api_id.model.application import Application
-from cybrid_api_id.model.application_with_secret_all_of import ApplicationWithSecretAllOf
-globals()['Application'] = Application
-globals()['ApplicationWithSecretAllOf'] = ApplicationWithSecretAllOf
-from cybrid_api_id.model.application_with_secret import ApplicationWithSecret
+from cybrid_api_id.model.post_customer_token import PostCustomerToken
 
 
-class TestApplicationWithSecret(unittest.TestCase):
-    """ApplicationWithSecret unit test stubs"""
+class TestPostCustomerToken(unittest.TestCase):
+    """PostCustomerToken unit test stubs"""
 
     def setUp(self):
         pass
@@ -29,10 +25,10 @@ class TestApplicationWithSecret(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testApplicationWithSecret(self):
-        """Test ApplicationWithSecret"""
+    def testPostCustomerToken(self):
+        """Test PostCustomerToken"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = ApplicationWithSecret()  # noqa: E501
+        # model = PostCustomerToken()  # noqa: E501
         pass
 
 

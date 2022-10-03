@@ -1,7 +1,7 @@
 # cybrid-api-id-python
 # Cybrid API documentation
 
-Welcome to Cybrid, an all-in-one crypto platform that enables you to easily **build** and **launch** white-lable crypto products or services.
+Welcome to Cybrid, an all-in-one crypto platform that enables you to easily **build** and **launch** white-label crypto products or services.
 
 In these documents, you'll find details on how our REST API operates and generally how our platform functions.
 
@@ -11,9 +11,9 @@ If you're looking for our UI SDK Widgets for Web or Mobile (iOS/Android), genera
 
 ## Getting Started
 
-This is Cybrid's public interactive API documentation, which allows you to fully test our API's. If you'd like to use a different tool to exercise our API's, you can download the [Open API 3.0 yaml](https://bank.demo.cybrid.app/api/schema/v1/swagger.yaml) for import.
+This is Cybrid's public interactive API documentation, which allows you to fully test our APIs. If you'd like to use a different tool to exercise our APIs, you can download the [Open API 3.0 yaml](https://bank.demo.cybrid.app/api/schema/v1/swagger.yaml) for import.
 
-If you're new to our API's and the Cybrid Platform, follow the below guides to get set up and familiar with the platform:
+If you're new to our APIs and the Cybrid Platform, follow the below guides to get set up and familiar with the platform:
 
 1. [Getting Started in the Cybrid Sandbox](https://www.cybrid.xyz/guides/getting-started)
 2. [Getting Ready for Trading](https://www.cybrid.xyz/guides/getting-ready-for-trading)
@@ -28,10 +28,10 @@ If you've already run through the first two guides, you can follow the [Running 
 There are three primary ways you can interact with the Cybrid platform:
 
 1. Directly via our RESTful API (this documentation)
-2. Using our API Clients available in a variety of languages ([Angular](https://github.com/Cybrid-app/cybrid-api-bank-angular), [Java](https://github.com/Cybrid-app/cybrid-api-bank-java), [Kotlin](https://github.com/Cybrid-app/cybrid-api-bank-kotlin), [Python](https://github.com/Cybrid-app/cybrid-api-bank-python), [Ruby](https://github.com/Cybrid-app/cybrid-api-bank-ruby), [Swift](https://github.com/Cybrid-app/cybrid-api-bank-swift) or [Typescript](https://github.com/Cybrid-app/cybrid-api-bank-typescript))
+2. Using our API clients available in a variety of languages ([Angular](https://github.com/Cybrid-app/cybrid-api-bank-angular), [Java](https://github.com/Cybrid-app/cybrid-api-bank-java), [Kotlin](https://github.com/Cybrid-app/cybrid-api-bank-kotlin), [Python](https://github.com/Cybrid-app/cybrid-api-bank-python), [Ruby](https://github.com/Cybrid-app/cybrid-api-bank-ruby), [Swift](https://github.com/Cybrid-app/cybrid-api-bank-swift) or [Typescript](https://github.com/Cybrid-app/cybrid-api-bank-typescript))
 3. Integrating a platform specific SDK ([Web](https://github.com/Cybrid-app/cybrid-sdk-web), [Android](https://github.com/Cybrid-app/cybrid-sdk-android), Apple-coming soon)
 
-Our complete set of APIs allows you to manage resources across three distinct areas: your `Organization`, your `Banks` and your `Identities`. For most of your testing and interaction you'll be using the `Bank` API, which is where the majority of API's reside.
+Our complete set of APIs allows you to manage resources across three distinct areas: your `Organization`, your `Banks` and your `Identities`. For most of your testing and interaction you'll be using the `Bank` API, which is where the majority of APIs reside.
 
 *The complete set of APIs can be found on the following pages:*
 
@@ -45,17 +45,19 @@ For questions please contact [Support](mailto:support@cybrid.xyz) at any time fo
 
 ## Authenticating with the API
 
-The Cybrid Platform uses OAuth 2.0 Bearer Tokens to authenticate requests to the platform. Credentials to create `Organization` and `Bank` tokens can be generated via the [Cybrid Sandbox](https://id.demo.cybrid.app).
+The Cybrid Platform uses OAuth 2.0 Bearer Tokens to authenticate requests to the platform. Credentials to create `Organization` and `Bank` tokens can be generated via the [Cybrid Sandbox](https://id.demo.cybrid.app). Access tokens can be generated for a `Customer` as well via the [Cybrid IdP](https://id.demo.cybrid.app) as well.
 
-An `Organization` Token applies broadly to the whole Organization and all of its `Banks`, whereas, a `Bank` Token is specific to an individual Bank.
+An `Organization` access token applies broadly to the whole Organization and all of its `Banks`, whereas, a `Bank` access token is specific to an individual Bank. `Customer` tokens, similarly, are scoped to a specific customer in a bank.
 
 Both `Organization` and `Bank` tokens can be created using the OAuth Client Credential Grant flow. Each Organization and Bank has its own unique `Client ID` and `Secret` that allows for machine-to-machine authentication.
+
+A `Bank` can then generate `Customer` access tokens via API.
 
 <font color=\"orange\">**⚠️ Never share your Client ID or Secret publicly or in your source code repository.**</font>
 
 Your `Client ID` and `Secret` can be exchanged for a time-limited `Bearer Token` by interacting with the Cybrid Identity Provider or through interacting with the **Authorize** button in this document.
 
-The following curl command can be used to quickly generate a `bearer token` for use in testing the API or demo applications.
+The following curl command can be used to quickly generate a `Bearer Token` for use in testing the API or demo applications.
 
 ```
 curl -X POST https://id.demo.cybrid.app/oauth/token -d '{
@@ -73,28 +75,27 @@ The Cybrid platform supports the use of scopes to control the level of access a 
 
 The following scopes are available on the platform and can be requested when generating either an Organization or a Bank token. Generally speaking, the _Read_ scope is required to read and list resources, the _Write_ scope is required to update a resource and the _Execute_ scope is required to create a resource.
 
-| Resource      | Read scope         | Write scope          | Execute scope     | Token Type         |
-|---------------|--------------------|----------------------|-------------------|--------------------|
-| Organizations | organizations:read | organizations:write  |                   | Organization/ Bank |
-| Banks         | banks:read         | banks:write          | banks:execute     | Organization/ Bank |
-| Customers     | customers:read     | customers:write      | customers:execute | Bank               |
-| Assets        | prices:read        |                      |                   | Bank               |
-| Accounts      | accounts:read      |                      | accounts:execute  | Bank               |
-| Prices        | prices:read        |                      |                   | Bank               |
-| Symbols       | prices:read        |                      |                   | Bank               |
-| Quotes        | quotes:read        |                      | quotes:execute    | Bank               |
-| Trades        | trades:read        |                      | trades:execute    | Bank               |
-| Rewards       | rewards:read       |                      | rewards:execute   | Bank               |
+| Resource      | Read scope (Token Type)                       | Write scope (Token Type)           | Execute scope (Token Type)        |
+|---------------|-----------------------------------------------|------------------------------------|-----------------------------------|
+| Organizations | organizations:read (Organization)             | organizations:write (Organization) |                                   |
+| Banks         | banks:read (Organization, Bank)               | banks:write (Organization, Bank)   | banks:execute (Organization)      |
+| Customers     | customers:read (Organization, Bank, Customer) | customers:write (Bank)             | customers:execute (Bank)          |
+| Accounts      | accounts:read (Organization, Bank, Customer)  |                                    | accounts:execute (Bank, Customer) |
+| Prices        | prices:read (Bank, Customer)                  |                                    |                                   |
+| Quotes        | quotes:read (Organization, Bank, Customer)    |                                    | quotes:execute (Bank, Customer)   |
+| Trades        | trades:read (Organization, Bank, Customer)    |                                    | trades:execute (Bank              |
+| Rewards       | rewards:read (Bank, Bank)                     |                                    | rewards:execute (Bank             |
 
 ## Available Endpoints
 
-The available API's for the [Identity](https://id.demo.cybrid.app/api/schema/swagger-ui), [Organization](https://organization.demo.cybrid.app/api/schema/swagger-ui) and [Bank](https://bank.demo.cybrid.app/api/schema/swagger-ui) API services are listed below:
+The available APIs for the [Identity](https://id.demo.cybrid.app/api/schema/swagger-ui), [Organization](https://organization.demo.cybrid.app/api/schema/swagger-ui) and [Bank](https://bank.demo.cybrid.app/api/schema/swagger-ui) API services are listed below:
 
-| API Sevice   | Model            | API Endpoint Path              | Description                                                               |
-| ------------ | ---------------- | ------------------------------ | ------------------------------------------------------------------------- |
+| API Service  | Model            | API Endpoint Path              | Description                                                               |
+|--------------|------------------|--------------------------------|---------------------------------------------------------------------------|
 | Identity     | Bank             | /api/bank_applications         | Create and list banks                                                     |
 | Identity     | Organization     | /api/organization_applications | Create and list organizations                                             |
-| Organization | Organization     | /api/organizations             | API's to retrieve and update organization name                            |
+| Identity     | CustomerToken    | /api/customer_tokens           | Create customer JWT access tokens                                         |
+| Organization | Organization     | /api/organizations             | APIs to retrieve and update organization name                             |
 | Bank         | Asset            | /api/assets                    | Get a list of assets supported by the platform (ex: BTC, ETH)             |
 | Bank         | VerificationKey  | /api/bank_verification_keys    | Create, list and retrive verification keys, used for signing identities   |
 | Bank         | Banks            | /api/banks                     | Create, update and list banks, the parent to customers, accounts, etc     |
@@ -133,7 +134,7 @@ An `Organization` can have multiple `banks`, in either sandbox or production env
 
 This Python package is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project:
 
-- API version: v0.45.3
+- API version: v0.46.0
 - Package version: 1.0.0
 - Build package: org.openapitools.codegen.languages.PythonClientCodegen
 
@@ -231,6 +232,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *BankApplicationsIdpApi* | [**create_bank_application**](docs/BankApplicationsIdpApi.md#create_bank_application) | **POST** /api/bank_applications | Create bank application
 *BankApplicationsIdpApi* | [**list_bank_applications**](docs/BankApplicationsIdpApi.md#list_bank_applications) | **GET** /api/bank_applications | List bank applications
+*CustomerTokensIdpApi* | [**create_customer_token**](docs/CustomerTokensIdpApi.md#create_customer_token) | **POST** /api/customer_tokens | Create customer access token
 *OrganizationApplicationsIdpApi* | [**create_organization_application**](docs/OrganizationApplicationsIdpApi.md#create_organization_application) | **POST** /api/organization_applications | Create organization application
 *OrganizationApplicationsIdpApi* | [**list_organization_applications**](docs/OrganizationApplicationsIdpApi.md#list_organization_applications) | **GET** /api/organization_applications | List organization applications
 
@@ -241,9 +243,11 @@ Class | Method | HTTP request | Description
  - [ApplicationList](docs/ApplicationList.md)
  - [ApplicationWithSecret](docs/ApplicationWithSecret.md)
  - [ApplicationWithSecretAllOf](docs/ApplicationWithSecretAllOf.md)
+ - [CustomerToken](docs/CustomerToken.md)
  - [ListRequestPage](docs/ListRequestPage.md)
  - [ListRequestPerPage](docs/ListRequestPerPage.md)
  - [PostBankApplication](docs/PostBankApplication.md)
+ - [PostCustomerToken](docs/PostCustomerToken.md)
  - [PostOrganizationApplication](docs/PostOrganizationApplication.md)
 
 

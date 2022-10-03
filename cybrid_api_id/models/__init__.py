@@ -13,7 +13,9 @@ from cybrid_api_id.model.application import Application
 from cybrid_api_id.model.application_list import ApplicationList
 from cybrid_api_id.model.application_with_secret import ApplicationWithSecret
 from cybrid_api_id.model.application_with_secret_all_of import ApplicationWithSecretAllOf
+from cybrid_api_id.model.customer_token import CustomerToken
 from cybrid_api_id.model.list_request_page import ListRequestPage
 from cybrid_api_id.model.list_request_per_page import ListRequestPerPage
 from cybrid_api_id.model.post_bank_application import PostBankApplication
+from cybrid_api_id.model.post_customer_token import PostCustomerToken
 from cybrid_api_id.model.post_organization_application import PostOrganizationApplication

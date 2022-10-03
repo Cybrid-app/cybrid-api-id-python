@@ -9,30 +9,26 @@
 """
 
 
-import sys
 import unittest
 
 import cybrid_api_id
-from cybrid_api_id.model.application import Application
-from cybrid_api_id.model.application_with_secret_all_of import ApplicationWithSecretAllOf
-globals()['Application'] = Application
-globals()['ApplicationWithSecretAllOf'] = ApplicationWithSecretAllOf
-from cybrid_api_id.model.application_with_secret import ApplicationWithSecret
+from cybrid_api_id.api.customer_tokens_idp_api import CustomerTokensIdpApi  # noqa: E501
 
 
-class TestApplicationWithSecret(unittest.TestCase):
-    """ApplicationWithSecret unit test stubs"""
+class TestCustomerTokensIdpApi(unittest.TestCase):
+    """CustomerTokensIdpApi unit test stubs"""
 
     def setUp(self):
-        pass
+        self.api = CustomerTokensIdpApi()  # noqa: E501
 
     def tearDown(self):
         pass
 
-    def testApplicationWithSecret(self):
-        """Test ApplicationWithSecret"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = ApplicationWithSecret()  # noqa: E501
+    def test_create_customer_token(self):
+        """Test case for create_customer_token
+
+        Create customer access token  # noqa: E501
+        """
         pass
 
 
