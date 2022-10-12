@@ -35,11 +35,11 @@ Our complete set of APIs allows you to manage resources across three distinct ar
 
 *The complete set of APIs can be found on the following pages:*
 
-| API                                                            | Description                  |
-|----------------------------------------------------------------|------------------------------|
-| [Organization API](https://organization.demo.cybrid.app/api/schema/swagger-ui) | APIs to manage organizations |
-| [Bank API](https://bank.demo.cybrid.app/api/schema/swagger-ui)                 | APIs to manage banks (and all downstream customer activity)        |
-| [Identities API](https://id.demo.cybrid.app/api/schema/swagger-ui)                     | APIs to manage organization and bank identities    |
+| API                                                              | Description                                                 |
+|------------------------------------------------------------------|-------------------------------------------------------------|
+| [Organization API](https://organization.demo.cybrid.app/api/schema/swagger-ui)   | APIs to manage organizations                                |
+| [Bank API](https://bank.demo.cybrid.app/api/schema/swagger-ui)                   | APIs to manage banks (and all downstream customer activity) |
+| [Identities API](https://id.demo.cybrid.app/api/schema/swagger-ui)                       | APIs to manage organization and bank identities             |
 
 For questions please contact [Support](mailto:support@cybrid.xyz) at any time for assistance, or contact the [Product Team](mailto:product@cybrid.xyz) for product suggestions.
 
@@ -75,39 +75,41 @@ The Cybrid platform supports the use of scopes to control the level of access a 
 
 The following scopes are available on the platform and can be requested when generating either an Organization or a Bank token. Generally speaking, the _Read_ scope is required to read and list resources, the _Write_ scope is required to update a resource and the _Execute_ scope is required to create a resource.
 
-| Resource      | Read scope (Token Type)                       | Write scope (Token Type)           | Execute scope (Token Type)        |
-|---------------|-----------------------------------------------|------------------------------------|-----------------------------------|
-| Organizations | organizations:read (Organization)             | organizations:write (Organization) |                                   |
-| Banks         | banks:read (Organization, Bank)               | banks:write (Organization, Bank)   | banks:execute (Organization)      |
-| Customers     | customers:read (Organization, Bank, Customer) | customers:write (Bank)             | customers:execute (Bank)          |
-| Accounts      | accounts:read (Organization, Bank, Customer)  |                                    | accounts:execute (Bank, Customer) |
-| Prices        | prices:read (Bank, Customer)                  |                                    |                                   |
-| Quotes        | quotes:read (Organization, Bank, Customer)    |                                    | quotes:execute (Bank, Customer)   |
-| Trades        | trades:read (Organization, Bank, Customer)    |                                    | trades:execute (Bank              |
-| Rewards       | rewards:read (Bank, Bank)                     |                                    | rewards:execute (Bank             |
+| Resource               | Read scope (Token Type)                                    | Write scope (Token Type)           | Execute scope (Token Type)                      |
+|------------------------|------------------------------------------------------------|------------------------------------|-------------------------------------------------|
+| Organizations          | organizations:read (Organization)                          | organizations:write (Organization) |                                                 |
+| Banks                  | banks:read (Organization, Bank)                            | banks:write (Organization, Bank)   | banks:execute (Organization)                    |
+| Customers              | customers:read (Organization, Bank, Customer)              | customers:write (Bank)             | customers:execute (Bank)                        |
+| Accounts               | accounts:read (Organization, Bank, Customer)               |                                    | accounts:execute (Bank, Customer)               |
+| Prices                 | prices:read (Bank, Customer)                               |                                    |                                                 |
+| Quotes                 | quotes:read (Organization, Bank, Customer)                 |                                    | quotes:execute (Bank, Customer)                 |
+| Trades                 | trades:read (Organization, Bank, Customer)                 |                                    | trades:execute (Bank)                           |
+| Rewards                | rewards:read (Bank)                                        |                                    | rewards:execute (Bank)                          |
+| External bank accounts | external_bank_accounts:read (Organization, Bank, Customer) |                                    | external_bank_accounts:execute (Bank, Customer) |
 
 ## Available Endpoints
 
 The available APIs for the [Identity](https://id.demo.cybrid.app/api/schema/swagger-ui), [Organization](https://organization.demo.cybrid.app/api/schema/swagger-ui) and [Bank](https://bank.demo.cybrid.app/api/schema/swagger-ui) API services are listed below:
 
-| API Service  | Model            | API Endpoint Path              | Description                                                               |
-|--------------|------------------|--------------------------------|---------------------------------------------------------------------------|
-| Identity     | Bank             | /api/bank_applications         | Create and list banks                                                     |
-| Identity     | Organization     | /api/organization_applications | Create and list organizations                                             |
-| Identity     | CustomerToken    | /api/customer_tokens           | Create customer JWT access tokens                                         |
-| Organization | Organization     | /api/organizations             | APIs to retrieve and update organization name                             |
-| Bank         | Asset            | /api/assets                    | Get a list of assets supported by the platform (ex: BTC, ETH)             |
-| Bank         | VerificationKey  | /api/bank_verification_keys    | Create, list and retrive verification keys, used for signing identities   |
-| Bank         | Banks            | /api/banks                     | Create, update and list banks, the parent to customers, accounts, etc     |
-| Bank         | FeeConfiguration | /api/fee_configurations        | Create and list bank fees (spread or fixed)                               |
-| Bank         | Customers        | /api/customers                 | Create and list customers                                                 |
-| Bank         | IdentityRecord   | /api/identity_records          | Create and list identity records, which are attached to customers for KYC |
-| Bank         | Accounts         | /api/accounts                  | Create and list accounts, which hold a specific asset for a customers     |
-| Bank         | Symbols          | /api/symbols                   | Get a list of symbols supported for trade (ex: BTC-USD)                   |
-| Bank         | Prices           | /api/prices                    | Get the current prices for assets on the platform                         |
-| Bank         | Quotes           | /api/quotes                    | Create and list quotes, which are required to execute trades              |
-| Bank         | Trades           | /api/trades                    | Create and list trades, which buy or sell cryptocurrency                  |
-| Bank         | Rewards          | /api/rewards                   | Create a new reward (automates quote/trade for simplicity)                |
+| API Service  | Model               | API Endpoint Path              | Description                                                                                       |
+|--------------|---------------------|--------------------------------|---------------------------------------------------------------------------------------------------|
+| Identity     | Bank                | /api/bank_applications         | Create and list banks                                                                             |
+| Identity     | Organization        | /api/organization_applications | Create and list organizations                                                                     |
+| Identity     | CustomerToken       | /api/customer_tokens           | Create customer JWT access tokens                                                                 |
+| Organization | Organization        | /api/organizations             | APIs to retrieve and update organization name                                                     |
+| Bank         | Asset               | /api/assets                    | Get a list of assets supported by the platform (ex: BTC, ETH)                                     |
+| Bank         | VerificationKey     | /api/bank_verification_keys    | Create, list and retrive verification keys, used for signing identities                           |
+| Bank         | Banks               | /api/banks                     | Create, update and list banks, the parent to customers, accounts, etc                             |
+| Bank         | FeeConfiguration    | /api/fee_configurations        | Create and list bank fees (spread or fixed)                                                       |
+| Bank         | Customers           | /api/customers                 | Create and list customers                                                                         |
+| Bank         | IdentityRecord      | /api/identity_records          | Create and list identity records, which are attached to customers for KYC                         |
+| Bank         | Accounts            | /api/accounts                  | Create and list accounts, which hold a specific asset for a customers                             |
+| Bank         | Symbols             | /api/symbols                   | Get a list of symbols supported for trade (ex: BTC-USD)                                           |
+| Bank         | Prices              | /api/prices                    | Get the current prices for assets on the platform                                                 |
+| Bank         | Quotes              | /api/quotes                    | Create and list quotes, which are required to execute trades                                      |
+| Bank         | Trades              | /api/trades                    | Create and list trades, which buy or sell cryptocurrency                                          |
+| Bank         | Rewards             | /api/rewards                   | Create a new reward (automates quote/trade for simplicity)                                        |
+| Bank         | ExternalBankAccount | /api/external_bank_account     | Create, get and list external bank accounts, which connect customer bank accounts to the platform |
 
 ## Understanding Object Models & Endpoints
 
@@ -134,7 +136,7 @@ An `Organization` can have multiple `banks`, in either sandbox or production env
 
 This Python package is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project:
 
-- API version: v0.47.7
+- API version: v0.48.0
 - Package version: 1.0.0
 - Build package: org.openapitools.codegen.languages.PythonClientCodegen
 
