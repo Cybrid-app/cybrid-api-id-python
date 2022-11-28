@@ -51,7 +51,7 @@ An `Organization` access token applies broadly to the whole Organization and all
 
 Both `Organization` and `Bank` tokens can be created using the OAuth Client Credential Grant flow. Each Organization and Bank has its own unique `Client ID` and `Secret` that allows for machine-to-machine authentication.
 
-A `Bank` can then generate `Customer` access tokens via API.
+A `Bank` can then generate `Customer` access tokens via API using our [Identities API](https://id.demo.cybrid.app/api/schema/swagger-ui).
 
 <font color=\"orange\">**⚠️ Never share your Client ID or Secret publicly or in your source code repository.**</font>
 
@@ -73,7 +73,7 @@ curl -X POST https://id.demo.cybrid.app/oauth/token -d '{
 
 The Cybrid platform supports the use of scopes to control the level of access a token is limited to. Scopes do not grant access to resources; instead, they provide limits, in support of the least privilege principal.
 
-The following scopes are available on the platform and can be requested when generating either an Organization or a Bank token. Generally speaking, the _Read_ scope is required to read and list resources, the _Write_ scope is required to update a resource and the _Execute_ scope is required to create a resource.
+The following scopes are available on the platform and can be requested when generating either an Organization, Bank or Customer token. Generally speaking, the _Read_ scope is required to read and list resources, the _Write_ scope is required to update a resource and the _Execute_ scope is required to create a resource.
 
 | Resource               | Read scope (Token Type)                                    | Write scope (Token Type)           | Execute scope (Token Type)                      |
 |------------------------|------------------------------------------------------------|------------------------------------|-------------------------------------------------|
@@ -113,7 +113,7 @@ The available APIs for the [Identity](https://id.demo.cybrid.app/api/schema/swag
 | Bank         | Rewards              | /api/rewards                   | Create a new reward (automates quote/trade for simplicity)                                        |
 | Bank         | ExternalBankAccounts | /api/external_bank_accounts    | Create, get and list external bank accounts, which connect customer bank accounts to the platform |
 | Bank         | Workflows            | /api/workflows                 | Create, get and list workflows                                                                    |
-| Bank         | Transfers            | /api/transfers                 | Create, get and list transfers                                                                    |
+| Bank         | Transfers            | /api/transfers                 | Create, get and list transfers (e.g., funding, book)                                              |
 
 ## Understanding Object Models & Endpoints
 
@@ -125,22 +125,22 @@ An `Organization` does not directly interact with `customers`. Instead, an Organ
 
 **Banks**
 
-A `Bank` is owned by an `Organization` and can be thought of as an environment or container for `Customers` and product offerings. Banks are created in either `Sandbox` or `Production` mode, where Sandbox is the environment that you would test, prototype and build in prior to production.
+A `Bank` is owned by an `Organization` and can be thought of as an environment or container for `customers` and product offerings. Banks are created in either `Sandbox` or `Production` mode, where `Sandbox` is the environment that you would test, prototype and build in prior to moving to `Production`.
 
-An `Organization` can have multiple `banks`, in either sandbox or production environments. A sandbox Bank will be backed by stubbed data and process flows. For instance, funding source processes will be simulated rather than performed, however asset prices are representative of real-world values. You have an unlimited amout of simulated fiat currency for testing purposes.
+An `Organization` can have multiple `banks`, in either `Sandbox` or `Production` environments. A `Sandbox Bank` will be backed by stubbed data and process flows. For instance, funding source transfer processes as well as trades will be simulated rather than performed, however asset prices are representative of real-world values. You have an unlimited amount of simulated fiat currency for testing purposes.
 
-## Customers
+**Customers**
 
 `Customers` represent your banking users on the platform. At present, we offer support for `Individuals` as Customers.
 
-`Customers` must be verified in our system before they can play any part on the platform, which means they must have an associated and valid `Identity Record`. See the Identity Records section for more details on how a customer can be verified.
+`Customers` must be verified (i.e., KYC'd) in our system before they can play any part on the platform, which means they must have an associated and valid `Identity Record`. See the Identity Records section for more details on how a customer can be verified.
 
-`Customers` must also have an `account` to be able to transact, in the desired asset class. See the Accounts APIs for more details on setting up accounts for the customer.
+`Customers` must also have an `Account` to be able to transact, in the desired asset class. See the Accounts APIs for more details on setting up accounts for the customer.
 
 
 This Python package is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project:
 
-- API version: v0.54.7
+- API version: v0.55.0
 - Package version: 1.0.0
 - Build package: org.openapitools.codegen.languages.PythonClientCodegen
 
