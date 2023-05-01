@@ -180,12 +180,19 @@ Navigate to the project directory:
 cd cybrid-api-id-python
 ```
 Create a Docker container:
+For Windows:
+
+CMD:
 ```bash
-docker run -it --name cybrid-api-id-python-dev  -v /opt/phx -v /$(pwd):/opt python:3.11 bash
+docker run -it --name cybrid-api-id-python-dev -w /opt -v %cd%:/opt python:3.11 bash
 ```
-Navigate to the project directory in the Docker contianer:
+PowerShell:
 ```bash
-cd opt
+docker run -it --name cybrid-api-id-python-dev -w /opt -v ${PWD}:/opt python:3.11 bash
+```
+For Linux:
+```bash
+docker run -it --name cybrid-api-id-python-dev -w /opt -v $(PWD):/opt python:3.11 bash
 ```
 Install the required dependencies:
 ```bash
