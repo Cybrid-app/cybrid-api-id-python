@@ -19,3 +19,5 @@ from cybrid_api_id.model.list_request_per_page import ListRequestPerPage
 from cybrid_api_id.model.post_bank_application import PostBankApplication
 from cybrid_api_id.model.post_customer_token import PostCustomerToken
 from cybrid_api_id.model.post_organization_application import PostOrganizationApplication
+from cybrid_api_id.model.post_user import PostUser
+from cybrid_api_id.model.user import User
