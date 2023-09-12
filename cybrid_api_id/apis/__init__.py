@@ -17,4 +17,4 @@
 from cybrid_api_id.api.bank_applications_idp_api import BankApplicationsIdpApi
 from cybrid_api_id.api.customer_tokens_idp_api import CustomerTokensIdpApi
 from cybrid_api_id.api.organization_applications_idp_api import OrganizationApplicationsIdpApi
-from cybrid_api_id.api.user_idp_api import UserIdpApi
+from cybrid_api_id.api.users_idp_api import UsersIdpApi

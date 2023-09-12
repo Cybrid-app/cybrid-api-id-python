@@ -21,3 +21,4 @@ from cybrid_api_id.model.post_customer_token import PostCustomerToken
 from cybrid_api_id.model.post_organization_application import PostOrganizationApplication
 from cybrid_api_id.model.post_user import PostUser
 from cybrid_api_id.model.user import User
+from cybrid_api_id.model.user_list import UserList

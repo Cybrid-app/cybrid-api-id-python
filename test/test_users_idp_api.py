@@ -9,26 +9,33 @@
 """
 
 
-import sys
 import unittest
 
 import cybrid_api_id
-from cybrid_api_id.model.customer_token import CustomerToken
+from cybrid_api_id.api.users_idp_api import UsersIdpApi  # noqa: E501
 
 
-class TestCustomerToken(unittest.TestCase):
-    """CustomerToken unit test stubs"""
+class TestUsersIdpApi(unittest.TestCase):
+    """UsersIdpApi unit test stubs"""
 
     def setUp(self):
-        pass
+        self.api = UsersIdpApi()  # noqa: E501
 
     def tearDown(self):
         pass
 
-    def testCustomerToken(self):
-        """Test CustomerToken"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = CustomerToken()  # noqa: E501
+    def test_create_user(self):
+        """Test case for create_user
+
+        Create user  # noqa: E501
+        """
+        pass
+
+    def test_list_user(self):
+        """Test case for list_user
+
+        List users  # noqa: E501
+        """
         pass
 
 

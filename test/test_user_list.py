@@ -13,11 +13,13 @@ import sys
 import unittest
 
 import cybrid_api_id
-from cybrid_api_id.model.customer_token import CustomerToken
+from cybrid_api_id.model.user import User
+globals()['User'] = User
+from cybrid_api_id.model.user_list import UserList
 
 
-class TestCustomerToken(unittest.TestCase):
-    """CustomerToken unit test stubs"""
+class TestUserList(unittest.TestCase):
+    """UserList unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,10 +27,10 @@ class TestCustomerToken(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testCustomerToken(self):
-        """Test CustomerToken"""
+    def testUserList(self):
+        """Test UserList"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = CustomerToken()  # noqa: E501
+        # model = UserList()  # noqa: E501
         pass
 
 
