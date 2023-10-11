@@ -9,33 +9,26 @@
 """
 
 
+import sys
 import unittest
 
 import cybrid_api_id
-from cybrid_api_id.api.bank_applications_idp_api import BankApplicationsIdpApi  # noqa: E501
+from cybrid_api_id.model.error_response import ErrorResponse
 
 
-class TestBankApplicationsIdpApi(unittest.TestCase):
-    """BankApplicationsIdpApi unit test stubs"""
+class TestErrorResponse(unittest.TestCase):
+    """ErrorResponse unit test stubs"""
 
     def setUp(self):
-        self.api = BankApplicationsIdpApi()  # noqa: E501
+        pass
 
     def tearDown(self):
         pass
 
-    def test_create_bank_application(self):
-        """Test case for create_bank_application
-
-        Create bank application  # noqa: E501
-        """
-        pass
-
-    def test_list_bank_applications(self):
-        """Test case for list_bank_applications
-
-        List bank applications  # noqa: E501
-        """
+    def testErrorResponse(self):
+        """Test ErrorResponse"""
+        # FIXME: construct object with mandatory attributes with example values
+        # model = ErrorResponse()  # noqa: E501
         pass
 
 
