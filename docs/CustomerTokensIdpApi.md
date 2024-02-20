@@ -24,6 +24,7 @@ import time
 import cybrid_api_id
 from cybrid_api_id.api import customer_tokens_idp_api
 from cybrid_api_id.model.customer_token import CustomerToken
+from cybrid_api_id.model.error_response import ErrorResponse
 from cybrid_api_id.model.post_customer_token import PostCustomerToken
 from pprint import pprint
 # Defining the host is optional and defaults to https://id.sandbox.cybrid.app
@@ -94,6 +95,10 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Customer token created |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**422** | Unprocessable Entity |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
