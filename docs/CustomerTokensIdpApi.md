@@ -56,7 +56,7 @@ with cybrid_api_id.ApiClient(configuration) as api_client:
     post_customer_token = PostCustomerToken(
         customer_guid="customer_guid_example",
         scopes=[
-            "customers:read",
+            "counterparties:read",
         ],
     ) # PostCustomerToken | 
 
