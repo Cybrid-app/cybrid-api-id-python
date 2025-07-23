@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**disable_user**](UsersIdpApi.md#disable_user) | **DELETE** /api/users/{user_guid} | Disable User
 [**get_user**](UsersIdpApi.md#get_user) | **GET** /api/users/{user_guid} | Get User
 [**list_user**](UsersIdpApi.md#list_user) | **GET** /api/users | List users
+[**update_user**](UsersIdpApi.md#update_user) | **PATCH** /api/users/{user_guid} | Update User
 
 
 # **create_user**
@@ -357,6 +358,102 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | list users |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_user**
+> User update_user(user_guid, patch_user)
+
+Update User
+
+Updates a user's allowed scopes.  Required scope: **users:write**
+
+### Example
+
+* Bearer (JWT) Authentication (BearerAuth):
+* OAuth Authentication (oauth2):
+
+```python
+import time
+import cybrid_api_id
+from cybrid_api_id.api import users_idp_api
+from cybrid_api_id.model.user import User
+from cybrid_api_id.model.error_response import ErrorResponse
+from cybrid_api_id.model.patch_user import PatchUser
+from pprint import pprint
+# Defining the host is optional and defaults to https://id.sandbox.cybrid.app
+# See configuration.py for a list of all supported configuration parameters.
+configuration = cybrid_api_id.Configuration(
+    host = "https://id.sandbox.cybrid.app"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): BearerAuth
+configuration = cybrid_api_id.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
+
+# Configure OAuth2 access token for authorization: oauth2
+configuration = cybrid_api_id.Configuration(
+    host = "https://id.sandbox.cybrid.app"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with cybrid_api_id.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = users_idp_api.UsersIdpApi(api_client)
+    user_guid = "user_guid_example" # str | Identifier for the user.
+    patch_user = PatchUser(
+        allowed_scopes=[
+            "organizations:read",
+        ],
+    ) # PatchUser | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Update User
+        api_response = api_instance.update_user(user_guid, patch_user)
+        pprint(api_response)
+    except cybrid_api_id.ApiException as e:
+        print("Exception when calling UsersIdpApi->update_user: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_guid** | **str**| Identifier for the user. |
+ **patch_user** | [**PatchUser**](PatchUser.md)|  |
+
+### Return type
+
+[**User**](User.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | user updated |  -  |
+**403** | Invalid scope |  -  |
+**422** | unprocessable entity - invalid scopes |  -  |
+**401** | Unauthorized - Authentication failed,  |  -  |
+**404** | user not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

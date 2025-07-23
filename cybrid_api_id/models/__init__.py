@@ -17,6 +17,7 @@ from cybrid_api_id.model.customer_token import CustomerToken
 from cybrid_api_id.model.error_response import ErrorResponse
 from cybrid_api_id.model.list_request_page import ListRequestPage
 from cybrid_api_id.model.list_request_per_page import ListRequestPerPage
+from cybrid_api_id.model.patch_user import PatchUser
 from cybrid_api_id.model.post_bank_application import PostBankApplication
 from cybrid_api_id.model.post_customer_token import PostCustomerToken
 from cybrid_api_id.model.post_organization_application import PostOrganizationApplication

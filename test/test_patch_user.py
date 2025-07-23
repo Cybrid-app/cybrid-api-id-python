@@ -13,11 +13,11 @@ import sys
 import unittest
 
 import cybrid_api_id
-from cybrid_api_id.model.post_customer_token import PostCustomerToken
+from cybrid_api_id.model.patch_user import PatchUser
 
 
-class TestPostCustomerToken(unittest.TestCase):
-    """PostCustomerToken unit test stubs"""
+class TestPatchUser(unittest.TestCase):
+    """PatchUser unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,10 +25,10 @@ class TestPostCustomerToken(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testPostCustomerToken(self):
-        """Test PostCustomerToken"""
+    def testPatchUser(self):
+        """Test PatchUser"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = PostCustomerToken()  # noqa: E501
+        # model = PatchUser()  # noqa: E501
         pass
 
 
