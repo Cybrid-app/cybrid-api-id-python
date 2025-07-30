@@ -28,6 +28,7 @@ import time
 import cybrid_api_id
 from cybrid_api_id.api import users_idp_api
 from cybrid_api_id.model.user import User
+from cybrid_api_id.model.error_response import ErrorResponse
 from cybrid_api_id.model.post_user import PostUser
 from pprint import pprint
 # Defining the host is optional and defaults to https://id.sandbox.cybrid.app
@@ -58,6 +59,9 @@ with cybrid_api_id.ApiClient(configuration) as api_client:
     api_instance = users_idp_api.UsersIdpApi(api_client)
     post_user = PostUser(
         email="email_example",
+        allowed_scopes=[
+            "organizations:read",
+        ],
     ) # PostUser | 
 
     # example passing only required values which don't have defaults set
@@ -94,7 +98,8 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | User created |  -  |
+**201** | User created with custom scopes |  -  |
+**422** | Unprocessable entity - missing required scopes |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
