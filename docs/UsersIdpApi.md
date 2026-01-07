@@ -99,7 +99,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | User created with custom scopes |  -  |
-**422** | Unprocessable entity - missing required scopes |  -  |
+**403** | Forbidden |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -184,7 +184,7 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | User disabled |  -  |
 **401** | Unauthorized - Authentication failed,  |  -  |
-**403** | Invalid scope |  -  |
+**403** | Forbidden |  -  |
 **404** | user not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -455,10 +455,10 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | user updated |  -  |
-**403** | Invalid scope |  -  |
-**422** | unprocessable entity - invalid scopes |  -  |
 **401** | Unauthorized - Authentication failed,  |  -  |
+**403** | Forbidden |  -  |
 **404** | user not found |  -  |
+**422** | Unprocessable Content |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
