@@ -1,5 +1,6 @@
 # PatchUser
 
+Request body for user update.
 
 ## Properties
 Name | Type | Description | Notes

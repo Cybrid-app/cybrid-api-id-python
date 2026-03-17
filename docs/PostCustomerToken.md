@@ -1,5 +1,6 @@
 # PostCustomerToken
 
+Request body for customer token creation.
 
 ## Properties
 Name | Type | Description | Notes

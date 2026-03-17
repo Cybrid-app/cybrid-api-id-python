@@ -1,5 +1,6 @@
 # PostBankApplication
 
+Request body for bank application creation.
 
 ## Properties
 Name | Type | Description | Notes

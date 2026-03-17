@@ -1,5 +1,6 @@
 # PostUser
 
+Request body for user creation.
 
 ## Properties
 Name | Type | Description | Notes

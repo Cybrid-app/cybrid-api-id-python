@@ -1,5 +1,6 @@
 # PostOrganizationApplication
 
+Request body for organization application creation.
 
 ## Properties
 Name | Type | Description | Notes
