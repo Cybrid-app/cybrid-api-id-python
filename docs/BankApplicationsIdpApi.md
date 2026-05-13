@@ -6,7 +6,9 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_bank_application**](BankApplicationsIdpApi.md#create_bank_application) | **POST** /api/bank_applications | Create bank application
 [**delete_bank_application**](BankApplicationsIdpApi.md#delete_bank_application) | **DELETE** /api/bank_applications/{client_id} | Delete bank application
+[**get_bank_application**](BankApplicationsIdpApi.md#get_bank_application) | **GET** /api/bank_applications/{client_id} | Get bank application
 [**list_bank_applications**](BankApplicationsIdpApi.md#list_bank_applications) | **GET** /api/bank_applications | List bank applications
+[**update_bank_application**](BankApplicationsIdpApi.md#update_bank_application) | **PATCH** /api/bank_applications/{client_id} | Update bank application
 
 
 # **create_bank_application**
@@ -25,6 +27,7 @@ Creates a bank OAuth2 application.  Required scope: **bank_applications:execute*
 import time
 import cybrid_api_id
 from cybrid_api_id.api import bank_applications_idp_api
+from cybrid_api_id.model.error_response import ErrorResponse
 from cybrid_api_id.model.post_bank_application import PostBankApplication
 from cybrid_api_id.model.application_with_secret import ApplicationWithSecret
 from pprint import pprint
@@ -57,6 +60,9 @@ with cybrid_api_id.ApiClient(configuration) as api_client:
     post_bank_application = PostBankApplication(
         name="name_example",
         bank_guid="bank_guid_example",
+        ip_allowlist=[
+            "ip_allowlist_example",
+        ],
     ) # PostBankApplication | 
 
     # example passing only required values which don't have defaults set
@@ -94,6 +100,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | bank application created |  -  |
+**422** | Unprocessable Content |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -179,7 +186,95 @@ void (empty response body)
 **204** | Application discarded |  -  |
 **403** | Invalid scope |  -  |
 **404** | application not found |  -  |
-**401** | Unauthorized - Authentication failed,  |  -  |
+**401** | Unauthorized - Authentication failed |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_bank_application**
+> Application get_bank_application(client_id)
+
+Get bank application
+
+Retrieves a bank application.  Required scope: **bank_applications:read**
+
+### Example
+
+* Bearer (JWT) Authentication (BearerAuth):
+* OAuth Authentication (oauth2):
+
+```python
+import time
+import cybrid_api_id
+from cybrid_api_id.api import bank_applications_idp_api
+from cybrid_api_id.model.application import Application
+from cybrid_api_id.model.error_response import ErrorResponse
+from pprint import pprint
+# Defining the host is optional and defaults to https://id.sandbox.cybrid.app
+# See configuration.py for a list of all supported configuration parameters.
+configuration = cybrid_api_id.Configuration(
+    host = "https://id.sandbox.cybrid.app"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): BearerAuth
+configuration = cybrid_api_id.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
+
+# Configure OAuth2 access token for authorization: oauth2
+configuration = cybrid_api_id.Configuration(
+    host = "https://id.sandbox.cybrid.app"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with cybrid_api_id.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = bank_applications_idp_api.BankApplicationsIdpApi(api_client)
+    client_id = "client_id_example" # str | Identifier for the application.
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get bank application
+        api_response = api_instance.get_bank_application(client_id)
+        pprint(api_response)
+    except cybrid_api_id.ApiException as e:
+        print("Exception when calling BankApplicationsIdpApi->get_bank_application: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **client_id** | **str**| Identifier for the application. |
+
+### Return type
+
+[**Application**](Application.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | bank application found |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -269,6 +364,103 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | list bank applications |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_bank_application**
+> Application update_bank_application(client_id, patch_application)
+
+Update bank application
+
+Updates a bank application.  Required scope: **bank_applications:write**
+
+### Example
+
+* Bearer (JWT) Authentication (BearerAuth):
+* OAuth Authentication (oauth2):
+
+```python
+import time
+import cybrid_api_id
+from cybrid_api_id.api import bank_applications_idp_api
+from cybrid_api_id.model.application import Application
+from cybrid_api_id.model.patch_application import PatchApplication
+from cybrid_api_id.model.error_response import ErrorResponse
+from pprint import pprint
+# Defining the host is optional and defaults to https://id.sandbox.cybrid.app
+# See configuration.py for a list of all supported configuration parameters.
+configuration = cybrid_api_id.Configuration(
+    host = "https://id.sandbox.cybrid.app"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): BearerAuth
+configuration = cybrid_api_id.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
+
+# Configure OAuth2 access token for authorization: oauth2
+configuration = cybrid_api_id.Configuration(
+    host = "https://id.sandbox.cybrid.app"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with cybrid_api_id.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = bank_applications_idp_api.BankApplicationsIdpApi(api_client)
+    client_id = "client_id_example" # str | Identifier for the application.
+    patch_application = PatchApplication(
+        name="name_example",
+        ip_allowlist=[
+            "ip_allowlist_example",
+        ],
+    ) # PatchApplication | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Update bank application
+        api_response = api_instance.update_bank_application(client_id, patch_application)
+        pprint(api_response)
+    except cybrid_api_id.ApiException as e:
+        print("Exception when calling BankApplicationsIdpApi->update_bank_application: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **client_id** | **str**| Identifier for the application. |
+ **patch_application** | [**PatchApplication**](PatchApplication.md)|  |
+
+### Return type
+
+[**Application**](Application.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | bank application updated |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Unprocessable Content |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

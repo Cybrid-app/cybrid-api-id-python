@@ -13,13 +13,11 @@ import sys
 import unittest
 
 import cybrid_api_id
-from cybrid_api_id.model.application import Application
-globals()['Application'] = Application
-from cybrid_api_id.model.application_list import ApplicationList
+from cybrid_api_id.model.patch_application import PatchApplication
 
 
-class TestApplicationList(unittest.TestCase):
-    """ApplicationList unit test stubs"""
+class TestPatchApplication(unittest.TestCase):
+    """PatchApplication unit test stubs"""
 
     def setUp(self):
         pass
@@ -27,10 +25,10 @@ class TestApplicationList(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testApplicationList(self):
-        """Test ApplicationList"""
+    def testPatchApplication(self):
+        """Test PatchApplication"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = ApplicationList()  # noqa: E501
+        # model = PatchApplication()  # noqa: E501
         pass
 
 
