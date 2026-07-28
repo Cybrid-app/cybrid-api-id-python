@@ -13,13 +13,13 @@ import sys
 import unittest
 
 import cybrid_api_id
-from cybrid_api_id.model.user import User
-globals()['User'] = User
-from cybrid_api_id.model.user_list import UserList
+from cybrid_api_id.model.group import Group
+globals()['Group'] = Group
+from cybrid_api_id.model.group_list import GroupList
 
 
-class TestUserList(unittest.TestCase):
-    """UserList unit test stubs"""
+class TestGroupList(unittest.TestCase):
+    """GroupList unit test stubs"""
 
     def setUp(self):
         pass
@@ -27,10 +27,10 @@ class TestUserList(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testUserList(self):
-        """Test UserList"""
+    def testGroupList(self):
+        """Test GroupList"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = UserList()  # noqa: E501
+        # model = GroupList()  # noqa: E501
         pass
 
 

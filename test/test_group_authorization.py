@@ -13,13 +13,11 @@ import sys
 import unittest
 
 import cybrid_api_id
-from cybrid_api_id.model.user import User
-globals()['User'] = User
-from cybrid_api_id.model.user_list import UserList
+from cybrid_api_id.model.group_authorization import GroupAuthorization
 
 
-class TestUserList(unittest.TestCase):
-    """UserList unit test stubs"""
+class TestGroupAuthorization(unittest.TestCase):
+    """GroupAuthorization unit test stubs"""
 
     def setUp(self):
         pass
@@ -27,10 +25,10 @@ class TestUserList(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testUserList(self):
-        """Test UserList"""
+    def testGroupAuthorization(self):
+        """Test GroupAuthorization"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = UserList()  # noqa: E501
+        # model = GroupAuthorization()  # noqa: E501
         pass
 
 
