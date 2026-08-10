@@ -171,6 +171,45 @@ Then import the package:
 import cybrid_api_id
 ```
 
+### Setting up a development environment with Docker
+Make sure you have [Docker installed](https://docs.docker.com/get-docker/) on your machine.
+
+Clone the repository to your local machine using Git. For example, you can run the following command in your terminal:
+```bash
+git clone https://github.com/Cybrid-app/cybrid-api-id-python.git
+```
+Navigate to the project directory:
+```bash
+cd cybrid-api-id-python
+```
+Create a Docker container:
+For Windows:
+
+CMD:
+```bash
+docker run -it --name cybrid-api-id-python-dev -w /opt -v %cd%:/opt python:3.11 bash
+```
+PowerShell:
+```bash
+docker run -it --name cybrid-api-id-python-dev -w /opt -v ${PWD}:/opt python:3.11 bash
+```
+For Linux:
+```bash
+docker run -it --name cybrid-api-id-python-dev -w /opt -v $(PWD):/opt python:3.11 bash
+```
+Install the required dependencies:
+```bash
+pip install -r requirements.txt && pip install pytest
+```
+Run the unit tests to make sure everything is working properly:
+```bash
+pytest
+```
+Starts a Docker container:
+```bash
+docker container start -i cybrid-api-id-python-dev
+```
+
 ### Setuptools
 
 Install via [Setuptools](http://pypi.python.org/pypi/setuptools).
