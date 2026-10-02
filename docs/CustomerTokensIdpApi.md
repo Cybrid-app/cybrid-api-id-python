@@ -58,6 +58,10 @@ with cybrid_api_id.ApiClient(configuration) as api_client:
         scopes=[
             "counterparties:read",
         ],
+        inherit_ip_allowlist=True,
+        ip_allowlist=[
+            "ip_allowlist_example",
+        ],
     ) # PostCustomerToken | 
 
     # example passing only required values which don't have defaults set
