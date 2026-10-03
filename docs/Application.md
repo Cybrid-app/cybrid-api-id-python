@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **client_id** | **str** | The OAuth2 application&#39;s client ID. | 
 **scopes** | **[str]** | List of the scopes granted to the OAuth2 application. | 
 **ip_allowlist** | **[str]** | List of IPv4 addresses or CIDR ranges that are allowlisted for API access. | 
+**expires_at** | **datetime, none_type** | ISO8601 datetime the application expires at. Null for applications that do not expire. | 
 **created_at** | **datetime** | ISO8601 datetime the record was created at. | 
 **updated_at** | **datetime** | ISO8601 datetime the record was last updated at. | [optional] 
 **any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
