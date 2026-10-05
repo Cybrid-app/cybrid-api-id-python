@@ -149,7 +149,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with cybrid_api_id.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = bank_applications_idp_api.BankApplicationsIdpApi(api_client)
-    client_id = "client_id_example" # str | Identifier for the application.
+    client_id = "client_id_example" # str | The application client_id or guid.
 
     # example passing only required values which don't have defaults set
     try:
@@ -164,7 +164,7 @@ with cybrid_api_id.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **client_id** | **str**| Identifier for the application. |
+ **client_id** | **str**| The application client_id or guid. |
 
 ### Return type
 
@@ -236,7 +236,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with cybrid_api_id.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = bank_applications_idp_api.BankApplicationsIdpApi(api_client)
-    client_id = "client_id_example" # str | Identifier for the application.
+    client_id = "client_id_example" # str | The application client_id or guid.
 
     # example passing only required values which don't have defaults set
     try:
@@ -252,7 +252,7 @@ with cybrid_api_id.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **client_id** | **str**| Identifier for the application. |
+ **client_id** | **str**| The application client_id or guid. |
 
 ### Return type
 
@@ -414,7 +414,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with cybrid_api_id.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = bank_applications_idp_api.BankApplicationsIdpApi(api_client)
-    client_id = "client_id_example" # str | Identifier for the application.
+    client_id = "client_id_example" # str | The application client_id or guid.
     patch_application = PatchApplication(
         name="name_example",
         ip_allowlist=[
@@ -436,7 +436,7 @@ with cybrid_api_id.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **client_id** | **str**| Identifier for the application. |
+ **client_id** | **str**| The application client_id or guid. |
  **patch_application** | [**PatchApplication**](PatchApplication.md)|  |
 
 ### Return type

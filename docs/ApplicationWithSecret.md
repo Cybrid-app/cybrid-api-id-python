@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | Name provided for the OAuth2 application. | 
+**guid** | **str** | Auto-generated unique identifier for the OAuth2 application. | 
 **client_id** | **str** | The OAuth2 application&#39;s client ID. | 
 **scopes** | **[str]** | List of the scopes granted to the OAuth2 application. | 
 **ip_allowlist** | **[str]** | List of IPv4 addresses or CIDR ranges that are allowlisted for API access. | 
