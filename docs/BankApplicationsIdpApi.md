@@ -330,7 +330,7 @@ with cybrid_api_id.ApiClient(configuration) as api_client:
     api_instance = bank_applications_idp_api.BankApplicationsIdpApi(api_client)
     page = ListRequestPage(0) # int | The page index to retrieve. (optional)
     per_page = ListRequestPerPage(1) # int | The number of entities per page to return. (optional)
-    bank_guid = "bank_guid_example" # str | Bank guid to list applications for. (optional)
+    bank_guid = "bank_guid_example" # str | Bank guid to list applications for; organization tokens only, omitted lists all of its banks. (optional)
 
     # example passing only required values which don't have defaults set
     # and optional values
@@ -349,7 +349,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **int**| The page index to retrieve. | [optional]
  **per_page** | **int**| The number of entities per page to return. | [optional]
- **bank_guid** | **str**| Bank guid to list applications for. | [optional]
+ **bank_guid** | **str**| Bank guid to list applications for; organization tokens only, omitted lists all of its banks. | [optional]
 
 ### Return type
 

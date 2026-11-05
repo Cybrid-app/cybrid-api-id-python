@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | Name for the bank application. | 
 **expires_at** | **datetime** | ISO8601 datetime the application expires at; must be in the future. | 
-**bank_guid** | **str** | Bank guid the application is associated to. | [optional] 
+**bank_guid** | **str** | Bank guid the application is associated to; required for organization tokens, ignored for bank tokens. | [optional] 
 **ip_allowlist** | **[str]** | List of public IPv4 addresses or CIDR ranges to allowlist for API access. | [optional] 
 **any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
