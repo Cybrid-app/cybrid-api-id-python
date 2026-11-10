@@ -113,7 +113,7 @@ Name | Type | Description  | Notes
 
 Delete bank application
 
-Deletes an application.Required scope: **bank_applications:execute**
+Deletes an application.  Required scope: **bank_applications:execute**
 
 ### Example
 

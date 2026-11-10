@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 Create user
 
-Creates a user.  
+Creates a user.  Required scope: **users:execute**
 
 ### Example
 

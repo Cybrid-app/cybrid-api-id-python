@@ -112,7 +112,7 @@ Name | Type | Description  | Notes
 
 Delete organization application
 
-Deletes an application.Required scope: **organization_applications:execute**
+Deletes an application.  Required scope: **organization_applications:execute**
 
 ### Example
 
