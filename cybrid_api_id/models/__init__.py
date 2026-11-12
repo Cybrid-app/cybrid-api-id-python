@@ -27,6 +27,8 @@ from cybrid_api_id.model.patch_user import PatchUser
 from cybrid_api_id.model.post_bank_application import PostBankApplication
 from cybrid_api_id.model.post_customer_token import PostCustomerToken
 from cybrid_api_id.model.post_organization_application import PostOrganizationApplication
+from cybrid_api_id.model.post_throttle_tier import PostThrottleTier
 from cybrid_api_id.model.post_user import PostUser
+from cybrid_api_id.model.throttle_tier import ThrottleTier
 from cybrid_api_id.model.user import User
 from cybrid_api_id.model.user_list import UserList
